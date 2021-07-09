@@ -90,7 +90,6 @@ fig.set_facecolor((0, 0, 0, 1)) # add final
 ax.set_ylim(0,11) # wrong, but works
 ax.set_yticks(np.arange(10))
 plt.xticks([])
-#plt.figtext(0.7, 0.01, "github.com/bzimons", ha="left", fontsize=12,color='w')
 plt.title('Evolution of top10 sub20 1.16+ RSG Minecraft Speedrun ',color='w')
 
 
