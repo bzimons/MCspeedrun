@@ -86,8 +86,8 @@ df =df.drop(columns=['date'])
 plt.rcParams['animation.ffmpeg_path'] = 'C:\\FFmpeg\\bin\\ffmpeg.exe'
 fig, ax = plt.subplots(figsize=(7, 4.5)) # 6, 3.5
 ax.set_facecolor((0, 0, 0, 1))
-fig.set_facecolor((0, 0, 0, 1)) # add final
-ax.set_ylim(0,11) # wrong, but works
+fig.set_facecolor((0, 0, 0, 1)) 
+ax.set_ylim(0,11)
 ax.set_yticks(np.arange(10))
 plt.xticks([])
 plt.title('Evolution of top10 sub20 1.16+ RSG Minecraft Speedrun ',color='w')
@@ -106,15 +106,13 @@ bcr.bar_chart_race(
     label_bars=True,
     bar_size=.90,
     period_label={'x': .95, 'y': -.05, 'ha': 'right', 'va': 'center','color':'w','family' : 'Franklin Gothic Medium','size': 15}, # date posix
-    # period_fmt='%B, %d, %Y',
     period_summary_func=lambda v, r: {'x': .99, 'y':  1,'s': f'',
     'ha': 'right', 'size': 8, 'family' : 'Franklin Gothic Medium'},
-    #perpendicular_bar_func='median',
     period_length=500,
     figsize=(5, 3),
     dpi=300,
     cmap= cm.get_cmap('jet', 50),
-    title='kd o titulo',
+    title='',
     title_size='',
     bar_label_size=9,
     tick_label_size=5,
