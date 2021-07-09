@@ -1,15 +1,10 @@
-from numpy.core import numeric
 from numpy.core.numeric import NaN
 import pandas as pd
 import numpy as np
-from datetime import date, timedelta,datetime
+from datetime import timedelta,datetime
 import bar_chart_race2 as bcr
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-import matplotlib.animation as animation
-from IPython.display import HTML
 import re
-from matplotlib.animation import FuncAnimation
 from matplotlib import cm
 from itertools import compress
 
@@ -22,10 +17,10 @@ bol=df['Game'].astype(str).str.startswith(r'Any% Glitchless - Random Seed, 1.16+
 df = df[bol]
 df = df[['Username','In-game-time','Date']]
 player = df['Username']
-# print(df.head(20))
 
-data= df['Date']
-DATE = [datetime.strptime(x,'%Y-%m-%d').date() for x in data] # '%d/%m/%Y'
+
+ddate= df['Date']
+DATE = [datetime.strptime(x,'%Y-%m-%d').date() for x in ddate] # '%d/%m/%Y'
 df['Date']=DATE
 
 TIME= df['In-game-time']
@@ -40,17 +35,18 @@ for i in TIME:
     newTIME.append(i)
 
 TIME = [datetime.strptime(x,"%Hh%Mm%Ss%fms").time() for x in newTIME]
-ts = [(t.hour * 3600 + t.minute * 60 + t.second + (t.microsecond)*(10**-6)) for t in TIME] # 1/ inverse, to plot the lower time on top or chart
+ts = [(t.hour * 3600 + t.minute * 60 + t.second + (t.microsecond)*(10**-6)) for t in TIME] 
 df['In-game-time']=ts
 
-# ONLY SUB20
 
+
+# ONLY SUB20
 bol=[i.hour==0 and i.minute<20 for i in TIME]
 df = df[bol]
 TIME = list(compress(TIME, bol))
 DATE=df['Date']
 
-d1 = min(DATE) #lower date
+d1 = min(DATE) 
 d2 = max(DATE) 
 
 # list containing all of the dates
@@ -60,16 +56,12 @@ dd = pd.DataFrame({'Date':dd})
 df = dd.append(df, ignore_index = True)
 df['Username'] = df['Username'].fillna('dummy')
 df['In-game-time'] = df['In-game-time'].fillna(0)
-# df= df.sort_values(by=['Date'])
-# print(df.head(10))
-# print(df.tail(10))
 
-#df = df.pivot_table(index='Date',columns='Username',values='In-game-time',aggfunc=min, dropna=False) 
+
+
 df = df.pivot_table(index=['Date'], columns=['Username'],values='In-game-time')
-# df = df.pivot(index=['Date'], columns=['Username'],values='In-game-time')
-# df = df.set_index('Username', append=True).groupby(level=[0, 1])['In-game-time'].sum(min_count=1).unstack(-1)
 df = df.drop(columns=['dummy'])
-# print(df.head(10))
+
 df = pd.DataFrame(df.to_records())#
 
 players = list(df.columns)[1:]
@@ -99,7 +91,7 @@ ax.set_ylim(0,11) # wrong, but works
 ax.set_yticks(np.arange(10))
 plt.xticks([])
 #plt.figtext(0.7, 0.01, "github.com/bzimons", ha="left", fontsize=12,color='w')
-plt.title('History of sub20 1.16+ RSG Minecraft Speedrun ',color='w')
+plt.title('Evolution of top10 sub20 1.16+ RSG Minecraft Speedrun ',color='w')
 
 
 bcr.bar_chart_race(
@@ -114,7 +106,7 @@ bcr.bar_chart_race(
     interpolate_period=False,
     label_bars=True,
     bar_size=.90,
-    period_label={'x': .95, 'y': -.05, 'ha': 'right', 'va': 'center','color':'w','family' : 'Franklin Gothic Medium','size': 12}, # date posix
+    period_label={'x': .95, 'y': -.05, 'ha': 'right', 'va': 'center','color':'w','family' : 'Franklin Gothic Medium','size': 15}, # date posix
     # period_fmt='%B, %d, %Y',
     period_summary_func=lambda v, r: {'x': .99, 'y':  1,'s': f'',
     'ha': 'right', 'size': 8, 'family' : 'Franklin Gothic Medium'},
