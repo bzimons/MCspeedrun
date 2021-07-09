@@ -90,7 +90,7 @@ fig.set_facecolor((0, 0, 0, 1))
 ax.set_ylim(0,11)
 ax.set_yticks(np.arange(10))
 plt.xticks([])
-plt.title('Evolution of top10 sub20 1.16+ RSG Minecraft Speedrun ',color='w')
+plt.title('Top 10 sub20 1.16+ RSG Minecraft Speedrun ',color='w')
 
 
 bcr.bar_chart_race(
