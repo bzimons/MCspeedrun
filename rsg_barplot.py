@@ -95,7 +95,7 @@ plt.title('Top 10 sub20 1.16+ RSG Minecraft Speedrun ',color='w')
 
 bcr.bar_chart_race(
     df=df,
-    filename='D:\\foque\\unb\\proj\\MCspeedrun\\barrace.mp4',
+    filename='D:\\foque\\unb\\proj\\MCspeedrun\\RSG_barrace.mp4',
     orientation='h',
     sort='desc',
     n_bars=10,
