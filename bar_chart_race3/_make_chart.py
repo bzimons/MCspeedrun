@@ -242,7 +242,7 @@ class _BarChartRace:
 
     def create_figure(self, dpi):
         fig = plt.Figure(figsize=self.figsize, dpi=dpi)
-        limit = (.2, self.n_bars + .8) # self.n_bars + .8
+        limit = (.2, self.n_bars + .8) 
         rect = self.calculate_new_figsize(fig)
         ax = fig.add_axes(rect)
         min_val = 1 if self.scale == 'log' else 0
@@ -278,7 +278,7 @@ class _BarChartRace:
         ax = fig.add_subplot()
         fake_cols = [chr(i + 70) for i in range(self.df_values.shape[1])]
         max_val = self.df_values.max().max()
-        #min_val = 1 if self.scale == 'log' else 0 #aqui
+        # 3?min_val = 1 if self.scale == 'log' else 0 #aqui
         if self.orientation == 'h':
             ax.barh(fake_cols, [1] * self.df_values.shape[1])
             ax.tick_params(labelrotation=0, axis='y', labelsize=self.tick_label_size)
@@ -374,9 +374,9 @@ class _BarChartRace:
                 zipped = zip(bar_location, bar_length)
 
             for x1, y1 in zipped:
-                xtext, ytext = self.ax.transLimits.transform((x1, y1))
+                xtext, ytext = self.ax.transLimits.transform((x1, y1)) #changed this part to format time label
                 if self.orientation == 'h':
-                    xtext += -.23 # Posix to inside bar add
+                    xtext += .01 # Posix in  bar 
                     b=datetime.timedelta(seconds=x1)
                     s=b.seconds
                     ms = int(b.microseconds / 1000)

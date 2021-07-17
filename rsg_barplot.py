@@ -78,6 +78,7 @@ for j in players:
 df = df.rename(columns={"Date": "date"})
 df.index = df['date']
 df =df.drop(columns=['date'])
+df.index = pd.to_datetime(df.index)
 
 # with pd.option_context('display.max_rows', None): 
 #     print(df[['Funderful_TV','realbenex','TheeSizzler']])

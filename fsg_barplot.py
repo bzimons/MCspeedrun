@@ -2,7 +2,7 @@ from numpy.core.numeric import NaN
 import pandas as pd
 import numpy as np
 from datetime import timedelta,datetime
-import bar_chart_race2 as bcr
+import bar_chart_race3 as bcr
 import matplotlib.pyplot as plt
 import re
 from matplotlib import cm
@@ -73,6 +73,9 @@ df =df.drop(columns=['date'])
 # with pd.option_context('display.max_rows', None): 
 #     print(df)
 
+df.index = pd.to_datetime(df.index)
+
+
 
 plt.rcParams['animation.ffmpeg_path'] = 'C:\\FFmpeg\\bin\\ffmpeg.exe'
 fig, ax = plt.subplots(figsize=(7, 4.5)) # 6, 3.5
@@ -81,12 +84,12 @@ fig.set_facecolor((0, 0, 0, 1))
 ax.set_ylim(0,11)
 ax.set_yticks(np.arange(10))
 plt.xticks([])
-plt.title('Top 10 sub20 1.16+ FSG Minecraft Speedrun ',color='w')
+plt.title('Minecraft Speedrun 1.16+ FSG World Record Overtime',color='w')
 
 
 bcr.bar_chart_race(
     df=df,
-    filename='D:\\foque\\unb\\proj\\MCspeedrun\\FSG_barrace.mp4',
+    filename='D:\\foque\\unb\\proj\\MCspeedrun\\FSG_barrace_.mp4',
     orientation='h',
     sort='desc',
     n_bars=10,
@@ -96,10 +99,11 @@ bcr.bar_chart_race(
     interpolate_period=False,
     label_bars=True,
     bar_size=.90,
+    period_fmt='%B %d, %Y',
     period_label={'x': .95, 'y': -.05, 'ha': 'right', 'va': 'center','color':'w','family' : 'Franklin Gothic Medium','size': 15}, # date posix
     period_summary_func=lambda v, r: {'x': .99, 'y':  1,'s': f'',
     'ha': 'right', 'size': 8, 'family' : 'Franklin Gothic Medium'},
-    period_length=500,
+    period_length=700,
     figsize=(5, 3),
     dpi=300,
     cmap= cm.get_cmap('jet', 50),
